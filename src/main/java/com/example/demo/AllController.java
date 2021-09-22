@@ -20,6 +20,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -83,14 +84,15 @@ public class AllController {
           "classpath:data/veiculo.json");
     }
     
+    
     @GetMapping(path="/area-segura/veiculo/crv/consultarAtpveRecusado", produces = { "application/json"})
 	@CrossOrigin(origins = "*")
 	public Object consultarAtpveRecusado(final HttpServletRequest request, HttpServletResponse response) {
         String cpf = request.getParameter("cpf");
         System.out.println("=====>"+ cpf );
 
-        return null;
-//        return resourceLoader.getResource("classpath:data/consultarAtpveRecusado.json");
+//        return null;
+        return resourceLoader.getResource("classpath:data/consultarAtpveRecusado.json");
 	}
     
     @GetMapping("/area-segura/veiculo/crv/buscaValores")
@@ -213,7 +215,15 @@ public class AllController {
 		return lst;
     }
     
-    
+    @PutMapping("/area-segura/veiculo/crv/emiteBorderoCancelamentoAtpve")
+	public Object emiteBorderoCancelamentoAtpveGETRAN(@RequestParam String chassi, @RequestParam String placa){
+		System.out.println("/veiculo/crv/emiteBorderoCancelamentoAtpve para chassi "+chassi);
+		// TODO COLOCAR CÓDIGO DE CANCELAMENTO
+		//return taxaService.emitirBorderoServico(cpf, chassi, placa, COD_SERVICO_CANCELAMENTO_ATPVE, SIN_CODIGO_CANCELAMENTO_ATPVE);
+		return resourceLoader.getResource(
+                "classpath:data/emiteBorderoCancelamentoAtpve.json");
+	}
+
     @GetMapping(path="/area-segura/veiculo/crv/cancelarAtpve", produces = { "application/json"})
     @CrossOrigin(origins = "*")
 	public Object cancelarAssinatura(final HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -308,27 +318,23 @@ public class AllController {
 		return map;
     }
 
-
-    @PostMapping(path="/area-segura/veiculo/crv/consulta-cancelamento")
+    @GetMapping(path="/area-segura/veiculo/crv/consulta-cancelamento")
     @CrossOrigin(origins = "*")
-    public Object consultaCancelamento(@RequestBody HashMap<String, String>dado) {
-    	
-    	
+    public Object consultaCancelamento(Object dado) {
     	System.out.println("---->"+ dado );
-    	
-    	
-    	HashMap map = new HashMap<String, Object>();
-        sleep(1000);
-		return map;
+
+//    	HashMap map = new HashMap<String, Object>();
+//        sleep(1000);
+//		return map;
+
+    	return resourceLoader.getResource(
+                "classpath:data/consulta-cancelamento.json");
     }
 
     @PostMapping(path="/area-segura/veiculo/crv/consultarStatusAtpv")
     @CrossOrigin(origins = "*")
     public Object consultarStatusAtpv(@RequestBody HashMap<String, String>dado) {
-    	
-    	
     	System.out.println("---->"+ dado );
-    	
     	
     	HashMap map = new HashMap<String, Object>();
         sleep(1000);

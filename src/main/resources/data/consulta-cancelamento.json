@@ -1,0 +1,12 @@
+{
+    "dataSolicitacao":"01/01/2020"
+    "numeroAtpve":"123456"
+    "valorVenda":654321
+    "numeroSequencialComrador":"111"
+    "numeroDocumentoComprador":"1111"
+    "nomeComprador":"Lalalalala"
+    "emailComprador":"m@g.com"
+	"codRetorno":"000"
+	"descRetorno":"????"
+    "erro":""
+}
