@@ -90,7 +90,6 @@ public class AllController {
 	public Object consultarAtpveRecusado(final HttpServletRequest request, HttpServletResponse response) {
         String cpf = request.getParameter("cpf");
         System.out.println("=====>"+ cpf );
-
 //        return null;
         return resourceLoader.getResource("classpath:data/consultarAtpveRecusado.json");
 	}
@@ -208,12 +207,24 @@ public class AllController {
         
         ArrayList<TimeLine>lst = new ArrayList<>();
         lst.add( new TimeLine("emissao", "Emissão da ATPV-e", true, "right"));
-        TimeLine tl = new TimeLine("assinaturaVendedor", "Assinatura eletrônica do vendedor", false, "right");
+        TimeLine tl = new TimeLine("assinaturaVendedor", "Assinatura eletrônica do vendedor", true, "right");
         tl.subTitulo = "Biometria (Face ID) em análise";
         lst.add( tl );
-        lst.add( new TimeLine("assinaturaComprador", "Assinatura eletrônica do comprador", false, "left"));
+        tl = new TimeLine("assinaturaComprador", "Assinatura eletrônica do comprador", false, "left");
+        tl.falha = true;
+        lst.add( tl);
 		return lst;
     }
+    
+    // /area-segura/veiculo/crv/reemitirBorderoAtpve2Via
+    @GetMapping("/area-segura/veiculo/crv/reemitirBorderoAtpve2Via")
+	public Object reemitirBorderoAtpve2Via(@RequestParam String chassi, @RequestParam String placa){
+		System.out.println("/veiculo/crv/emiteBorderoCancelamentoAtpve para chassi "+chassi);
+		// TODO COLOCAR CÓDIGO DE CANCELAMENTO
+		//return taxaService.emitirBorderoServico(cpf, chassi, placa, COD_SERVICO_CANCELAMENTO_ATPVE, SIN_CODIGO_CANCELAMENTO_ATPVE);
+		return resourceLoader.getResource(
+                "classpath:data/emiteBorderoCancelamentoAtpve.json");
+	}
     
     @PutMapping("/area-segura/veiculo/crv/emiteBorderoCancelamentoAtpve")
 	public Object emiteBorderoCancelamentoAtpveGETRAN(@RequestParam String chassi, @RequestParam String placa){
@@ -520,6 +531,7 @@ public class AllController {
     	public String titulo;
     	public String subTitulo;
     	public boolean concluido;
+    	public boolean falha;
     	public String position;
     	public TimeLine(String id, String tt, boolean ok, String pos) {
     		this.id = id;

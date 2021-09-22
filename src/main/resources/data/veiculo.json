@@ -53,6 +53,9 @@
       "renavam": "00846743211",
       "servicosDetran": null,
       "pendencias": {
+      	"debitosRestricoes":{
+      		"boletoSemPagamentoCancelamentoAtpve":true
+      	}
       }
     },
     {
